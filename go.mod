@@ -1,4 +1,4 @@
-module github.com/dojinkimm/go-example
+module github.com/dojinkimm/go-grpc-example
 
 go 1.14
 

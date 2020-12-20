@@ -1,7 +1,7 @@
 package data
 
 import (
-	pb "github.com/dojinkimm/go-example/user"
+	pb "github.com/dojinkimm/go-grpc-example/user"
 )
 
 var UserData = []*pb.UserMessage{
