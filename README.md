@@ -1,1 +1,1 @@
-# go-example
+# go-grpc-example
