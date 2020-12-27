@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package post;
+
+option go_package = "github.com/dojinkimm/go-grpc-example/protos/post";
+
+service Post {
+    rpc ListPostsByUserId(ListPostsByUserIdRequest) returns (ListPostsByUserIdResponse);
+    rpc ListPosts(ListPostsRequest) returns (ListPostsResponse);
+}
+
+message PostMessage {
+    string post_id = 1;
+    string author = 2;
+    string title = 3;
+    string body = 4;
+    repeated string tags = 5;
+}
+
+message ListPostsByUserIdRequest {
+    string user_id = 1;
+}
+
+
+message ListPostsByUserIdResponse {
+    repeated PostMessage post_messages = 1;
+}
+
+message ListPostsRequest{}
+
+message ListPostsResponse {
+    repeated PostMessage post_messages = 1;
+}
