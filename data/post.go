@@ -1,18 +1,18 @@
 package data
 
 import (
-	pb "github.com/dojinkimm/go-grpc-example/protos/post"
+	postpb "github.com/dojinkimm/go-grpc-example/protos/post"
 )
 
 type PostData struct {
 	UserID string
-	Posts  []*pb.PostMessage
+	Posts  []*postpb.PostMessage
 }
 
 var UserPosts = []*PostData{
 	{
 		UserID: "1",
-		Posts: []*pb.PostMessage{
+		Posts: []*postpb.PostMessage{
 			{
 				PostId: "1",
 				Author: "",
@@ -45,7 +45,7 @@ var UserPosts = []*PostData{
 	},
 	{
 		UserID: "3",
-		Posts: []*pb.PostMessage{
+		Posts: []*postpb.PostMessage{
 			{
 				PostId: "5",
 				Author: "",
@@ -57,7 +57,7 @@ var UserPosts = []*PostData{
 	},
 	{
 		UserID: "4",
-		Posts: []*pb.PostMessage{
+		Posts: []*postpb.PostMessage{
 			{
 				PostId: "6",
 				Author: "",
@@ -76,7 +76,7 @@ var UserPosts = []*PostData{
 	},
 	{
 		UserID: "5",
-		Posts: []*pb.PostMessage{
+		Posts: []*postpb.PostMessage{
 			{
 				PostId: "8",
 				Author: "",
