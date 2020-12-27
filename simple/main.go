@@ -9,8 +9,8 @@ import (
 
 const portNumber = "9000"
 
-func main(){
-	lis, err := net.Listen("tcp", ":" + portNumber)
+func main() {
+	lis, err := net.Listen("tcp", ":"+portNumber)
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}

@@ -8,21 +8,21 @@ import (
 	"google.golang.org/grpc"
 
 	"github.com/dojinkimm/go-grpc-example/data"
-	pb "github.com/dojinkimm/go-grpc-example/user"
+	userpb "github.com/dojinkimm/go-grpc-example/protos/user"
 )
 
 const portNumber = "9000"
 
 type userServer struct {
-	pb.UnimplementedUserServer
+	userpb.UnimplementedUserServer
 }
 
 // GetUser returns user message by user_id
-func (s *userServer) GetUser(ctx context.Context, req *pb.GetUserRequest) (*pb.GetUserResponse, error) {
+func (s *userServer) GetUser(ctx context.Context, req *userpb.GetUserRequest) (*userpb.GetUserResponse, error) {
 	userID := req.UserId
 
-	var userMessage *pb.UserMessage
-	for _, u := range data.UserData {
+	var userMessage *userpb.UserMessage
+	for _, u := range data.Users {
 		if u.UserId != userID {
 			continue
 		}
@@ -30,35 +30,34 @@ func (s *userServer) GetUser(ctx context.Context, req *pb.GetUserRequest) (*pb.G
 		break
 	}
 
-	return &pb.GetUserResponse{
+	return &userpb.GetUserResponse{
 		UserMessage: userMessage,
 	}, nil
 }
 
 // ListUsers returns all user messages
-func (s *userServer) ListUsers(ctx context.Context, req *pb.ListUsersRequest) (*pb.ListUsersResponse, error) {
-	userMessages := make([]*pb.UserMessage, len(data.UserData))
-	for i, u := range data.UserData {
+func (s *userServer) ListUsers(ctx context.Context, req *userpb.ListUsersRequest) (*userpb.ListUsersResponse, error) {
+	userMessages := make([]*userpb.UserMessage, len(data.Users))
+	for i, u := range data.Users {
 		userMessages[i] = u
 	}
 
-	return &pb.ListUsersResponse{
+	return &userpb.ListUsersResponse{
 		UserMessages: userMessages,
 	}, nil
 }
 
-func main(){
-	lis, err := net.Listen("tcp", ":" + portNumber)
+func main() {
+	lis, err := net.Listen("tcp", ":"+portNumber)
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
 
 	grpcServer := grpc.NewServer()
-	pb.RegisterUserServer(grpcServer, &userServer{})
+	userpb.RegisterUserServer(grpcServer, &userServer{})
 
 	log.Printf("start gRPC server on %s port", portNumber)
 	if err := grpcServer.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %s", err)
 	}
 }
-
