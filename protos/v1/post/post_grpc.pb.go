@@ -31,7 +31,7 @@ func NewPostClient(cc grpc.ClientConnInterface) PostClient {
 
 func (c *postClient) ListPostsByUserId(ctx context.Context, in *ListPostsByUserIdRequest, opts ...grpc.CallOption) (*ListPostsByUserIdResponse, error) {
 	out := new(ListPostsByUserIdResponse)
-	err := c.cc.Invoke(ctx, "/post.Post/ListPostsByUserId", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/v1.post.Post/ListPostsByUserId", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ func (c *postClient) ListPostsByUserId(ctx context.Context, in *ListPostsByUserI
 
 func (c *postClient) ListPosts(ctx context.Context, in *ListPostsRequest, opts ...grpc.CallOption) (*ListPostsResponse, error) {
 	out := new(ListPostsResponse)
-	err := c.cc.Invoke(ctx, "/post.Post/ListPosts", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/v1.post.Post/ListPosts", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ func _Post_ListPostsByUserId_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/post.Post/ListPostsByUserId",
+		FullMethod: "/v1.post.Post/ListPostsByUserId",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(PostServer).ListPostsByUserId(ctx, req.(*ListPostsByUserIdRequest))
@@ -107,7 +107,7 @@ func _Post_ListPosts_Handler(srv interface{}, ctx context.Context, dec func(inte
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/post.Post/ListPosts",
+		FullMethod: "/v1.post.Post/ListPosts",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(PostServer).ListPosts(ctx, req.(*ListPostsRequest))
@@ -116,7 +116,7 @@ func _Post_ListPosts_Handler(srv interface{}, ctx context.Context, dec func(inte
 }
 
 var _Post_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "post.Post",
+	ServiceName: "v1.post.Post",
 	HandlerType: (*PostServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -129,5 +129,5 @@ var _Post_serviceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "protos/post/post.proto",
+	Metadata: "protos/v1/post/post.proto",
 }

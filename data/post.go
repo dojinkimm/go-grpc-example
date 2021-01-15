@@ -1,7 +1,7 @@
 package data
 
 import (
-	postpb "github.com/dojinkimm/go-grpc-example/protos/post"
+	postpb "github.com/dojinkimm/go-grpc-example/protos/v1/post"
 )
 
 type PostData struct {

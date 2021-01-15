@@ -8,8 +8,8 @@ import (
 	"google.golang.org/grpc"
 
 	"github.com/dojinkimm/go-grpc-example/data"
-	postpb "github.com/dojinkimm/go-grpc-example/protos/post"
-	userpb "github.com/dojinkimm/go-grpc-example/protos/user"
+	postpb "github.com/dojinkimm/go-grpc-example/protos/v1/post"
+	userpb "github.com/dojinkimm/go-grpc-example/protos/v1/user"
 	client "github.com/dojinkimm/go-grpc-example/simple-client-server"
 )
 

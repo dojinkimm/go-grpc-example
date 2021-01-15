@@ -31,7 +31,7 @@ func NewUserClient(cc grpc.ClientConnInterface) UserClient {
 
 func (c *userClient) GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error) {
 	out := new(GetUserResponse)
-	err := c.cc.Invoke(ctx, "/user.User/GetUser", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/v1.user.User/GetUser", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ func (c *userClient) GetUser(ctx context.Context, in *GetUserRequest, opts ...gr
 
 func (c *userClient) ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error) {
 	out := new(ListUsersResponse)
-	err := c.cc.Invoke(ctx, "/user.User/ListUsers", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/v1.user.User/ListUsers", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ func _User_GetUser_Handler(srv interface{}, ctx context.Context, dec func(interf
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/user.User/GetUser",
+		FullMethod: "/v1.user.User/GetUser",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserServer).GetUser(ctx, req.(*GetUserRequest))
@@ -107,7 +107,7 @@ func _User_ListUsers_Handler(srv interface{}, ctx context.Context, dec func(inte
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/user.User/ListUsers",
+		FullMethod: "/v1.user.User/ListUsers",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(UserServer).ListUsers(ctx, req.(*ListUsersRequest))
@@ -116,7 +116,7 @@ func _User_ListUsers_Handler(srv interface{}, ctx context.Context, dec func(inte
 }
 
 var _User_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "user.User",
+	ServiceName: "v1.user.User",
 	HandlerType: (*UserServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -129,5 +129,5 @@ var _User_serviceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "protos/user/user.proto",
+	Metadata: "protos/v1/user/user.proto",
 }

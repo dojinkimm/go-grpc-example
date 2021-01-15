@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package post;
+package v1.post;
 
 option go_package = "github.com/dojinkimm/go-grpc-example/protos/post";
 
