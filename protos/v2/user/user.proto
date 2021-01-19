@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package v2.user;
+
+option go_package = "github.com/dojinkimm/go-grpc-example/protos/v2/user";
+
+import "google/api/annotations.proto";
+
+service User {
+    rpc GetUser(GetUserRequest) returns (GetUserResponse) {
+        option (google.api.http) = {
+            get: "/v2/users/{user_id}"
+        };
+    }
+    rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {
+        option (google.api.http) = {
+            get: "/v2/users"
+        };
+    }
+}
+
+message UserMessage {
+    string user_id = 1;
+    string name = 2;
+    string phone_number = 3;
+    int32 age = 4;
+}
+
+message GetUserRequest {
+    string user_id = 1;
+}
+
+
+message GetUserResponse {
+    UserMessage user_message = 1;
+}
+
+message ListUsersRequest{}
+
+message ListUsersResponse {
+    repeated UserMessage user_messages = 1;
+}
+
