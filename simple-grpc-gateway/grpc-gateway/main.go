@@ -10,7 +10,10 @@ import (
 
 	userpb "github.com/dojinkimm/go-grpc-example/protos/v2/user"
 )
-const portNumber = "9000"
+const (
+	portNumber = "9000"
+	gRPCServerPortNumber = "9001"
+)
 
 func main(){
 	ctx := context.Background()
@@ -22,7 +25,7 @@ func main(){
 	if err := userpb.RegisterUserHandlerFromEndpoint(
 		ctx,
 		mux,
-		"localhost:"+"9001",
+		"localhost:"+gRPCServerPortNumber,
 		options,
 	); 	err != nil {
 		log.Fatalf("failed to register gRPC gateway: %v", err)
