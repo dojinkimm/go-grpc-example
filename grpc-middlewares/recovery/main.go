@@ -5,15 +5,11 @@ import (
 	"log"
 	"net"
 
-	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
-	grpc_logrus "github.com/grpc-ecosystem/go-grpc-middleware/logging/logrus"
-	"github.com/sirupsen/logrus"
-	"google.golang.org/grpc"
-	"google.golang.org/grpc/codes"
-	"google.golang.org/grpc/status"
-
 	"github.com/dojinkimm/go-grpc-example/data"
 	userpb "github.com/dojinkimm/go-grpc-example/protos/v1/user"
+	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
+	grpc_recovery "github.com/grpc-ecosystem/go-grpc-middleware/recovery"
+	"google.golang.org/grpc"
 )
 
 const portNumber = "9000"
@@ -36,7 +32,7 @@ func (s *userServer) GetUser(ctx context.Context, req *userpb.GetUserRequest) (*
 	}
 
 	if userMessage == nil {
-		return nil, status.Error(codes.NotFound, "user is not found")
+		log.Panic("user is not found")
 	}
 
 	return &userpb.GetUserResponse{
@@ -62,11 +58,9 @@ func main() {
 		log.Fatalf("failed to listen: %v", err)
 	}
 
-	logrus.ErrorKey = "grpc.error"
-	logrusEntry := logrus.NewEntry(logrus.StandardLogger())
 	grpcServer := grpc.NewServer(
 		grpc.UnaryInterceptor(grpc_middleware.ChainUnaryServer(
-			grpc_logrus.UnaryServerInterceptor(logrusEntry),
+			grpc_recovery.UnaryServerInterceptor(),
 		)),
 	)
 	userpb.RegisterUserServer(grpcServer, &userServer{})
