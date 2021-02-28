@@ -36,4 +36,3 @@ var UsersV2 = []*userpb.UserMessage{
 		Age:         25,
 	},
 }
-

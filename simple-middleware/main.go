@@ -2,11 +2,11 @@ package main
 
 import (
 	"context"
-	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
 	"log"
 	"net"
 	"time"
 
+	grpc_middleware "github.com/grpc-ecosystem/go-grpc-middleware"
 	"google.golang.org/grpc"
 
 	"github.com/dojinkimm/go-grpc-example/data"
@@ -67,8 +67,8 @@ func main() {
 	grpcServer := grpc.NewServer(
 		grpc.UnaryInterceptor(grpc_middleware.ChainUnaryServer(
 			customMiddleware(),
-			)),
-		)
+		)),
+	)
 	userpb.RegisterUserServer(grpcServer, &userServer{})
 
 	log.Printf("start gRPC server on %s port", portNumber)

@@ -10,12 +10,13 @@ import (
 
 	userpb "github.com/dojinkimm/go-grpc-example/protos/v2/user"
 )
+
 const (
-	portNumber = "9000"
+	portNumber           = "9000"
 	gRPCServerPortNumber = "9001"
 )
 
-func main(){
+func main() {
 	ctx := context.Background()
 	mux := runtime.NewServeMux()
 	options := []grpc.DialOption{
@@ -27,7 +28,7 @@ func main(){
 		mux,
 		"localhost:"+gRPCServerPortNumber,
 		options,
-	); 	err != nil {
+	); err != nil {
 		log.Fatalf("failed to register gRPC gateway: %v", err)
 	}
 
